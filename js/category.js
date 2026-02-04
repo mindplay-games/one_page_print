@@ -1,8 +1,6 @@
 function groupMeta(group) {
   const map = {
-    basics: { title: "תרגול יסודות", sub: "פקודות, משתנים, תנאים, לולאות, פונקציות…" },
-    projects: { title: "תרגול פרויקטים", sub: "מיני־פרויקטים ותרגול מעשי" },
-    grade3: { title: "תרגול שנה ג׳", sub: "SQL שאלונים + תרגילי השלמה" },
+    basics: { title: "תרגול יסודות", sub: "פקודות, משתנים, תנאים, לולאות, פונקציות…" }
   };
   return map[group] ?? { title: "תרגול", sub: "" };
 }

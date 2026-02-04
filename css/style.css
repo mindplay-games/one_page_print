@@ -1,0 +1,468 @@
+:root{
+  --bg:#070A1A;
+
+  --card: rgba(255,255,255,0.10);
+  --card2: rgba(255,255,255,0.14);
+
+  --text:#EAF2FF;
+  --muted: rgba(234,242,255,0.78);
+
+  --line: rgba(255,255,255,0.14);
+
+  --accent:#60a5fa;      /* כחול */
+  --accent2:#a78bfa;     /* סגול */
+  --accent3:#22c55e;     /* ירוק */
+  --warn:#f59e0b;        /* כתום */
+  --bad:#ef4444;
+  --good:#16a34a;
+
+  --shadow: 0 18px 50px rgba(0,0,0,.35);
+
+  /* צבעי קטגוריות */
+  --b1:#22c55e; --b2:#60a5fa; /* basics */
+  --p1:#f97316; --p2:#a78bfa; /* projects */
+  --g1:#f43f5e; --g2:#06b6d4; /* grade3 */
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,"Rubik",Arial;
+
+  background:
+    radial-gradient(900px 520px at 10% 10%, rgba(96,165,250,.35), transparent 55%),
+    radial-gradient(900px 520px at 90% 15%, rgba(167,139,250,.35), transparent 55%),
+    radial-gradient(900px 520px at 35% 105%, rgba(34,197,94,.28), transparent 55%),
+    radial-gradient(900px 520px at 80% 95%, rgba(244,63,94,.22), transparent 55%),
+    linear-gradient(180deg, #070A1A 0%, #0B1026 55%, #070A1A 100%);
+
+  color: var(--text);
+}
+
+.top{
+  padding: 34px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align:center;
+  backdrop-filter: blur(10px);
+}
+
+h1,h2,h3{margin:0 0 8px}
+
+h1{
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: .2px;
+
+  background: linear-gradient(90deg, rgba(96,165,250,1), rgba(167,139,250,1), rgba(34,197,94,1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sub{ color: var(--muted); margin:6px 0 0; font-size:16px; }
+
+.container{
+  max-width:1050px;
+  margin:0 auto;
+  padding:22px;
+  display:grid;
+  gap:14px;
+}
+
+.card{
+  background: linear-gradient(180deg, var(--card2), var(--card));
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* Tiles בסיסיים */
+.tile{
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 22px;
+  padding: 16px;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+  text-align:right;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+  position: relative;
+  overflow:hidden;
+}
+
+.tile:hover{
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(255,255,255,0.28);
+  box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  filter: brightness(1.05);
+}
+
+.tile .tag{
+  color: rgba(234,242,255,0.85);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tile .name{
+  font-weight: 1000;
+  font-size: 20px;
+  margin-top: 6px;
+  color: var(--text);
+}
+
+.tile .desc{
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 6px;
+  line-height:1.6;
+}
+
+/* קטגוריות – Tile מיוחד */
+.catTile::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  opacity:.95;
+  filter: blur(18px);
+  z-index:0;
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(59,130,246,.55), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(167,139,250,.45), transparent 60%);
+}
+
+.catTile[data-variant="basics"]::before{
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(34,197,94,.55), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(96,165,250,.50), transparent 60%);
+}
+
+.catTile[data-variant="projects"]::before{
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(249,115,22,.60), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(167,139,250,.50), transparent 60%);
+}
+
+.catTile[data-variant="grade3"]::before{
+  background:
+    radial-gradient(520px 220px at 15% 10%, rgba(244,63,94,.55), transparent 60%),
+    radial-gradient(520px 220px at 85% 90%, rgba(6,182,212,.45), transparent 60%);
+}
+
+.catTile > *{ position: relative; z-index: 1; }
+
+.catTop{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom: 10px;
+}
+
+.catIcon{
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  font-size: 28px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* טקסטים */
+.text{color:var(--muted); line-height:1.7; font-size:15px}
+.row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px}
+
+/* כפתורים */
+.btn{
+  border:none;
+  border-radius:16px;
+  padding:11px 16px;
+  font-weight:900;
+  cursor:pointer;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color:white;
+  box-shadow: 0 14px 28px rgba(0,0,0,.25);
+}
+.btn:hover{ filter:brightness(1.04) }
+
+.btnGhost{
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.btnGreen{
+  background: linear-gradient(90deg, var(--accent3), #34d399);
+  box-shadow: 0 14px 28px rgba(0,0,0,.25);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.10);
+  color: var(--muted);
+  font-weight:800;
+  font-size:13px;
+}
+
+.hint, .solution{
+  margin-top:10px;
+  border:1px dashed rgba(255,255,255,0.28);
+  border-radius:14px;
+  padding:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  color: var(--text);
+}
+
+.hidden{display:none}
+
+.editor{
+  width:100%;
+  min-height:190px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
+  color: var(--text);
+  padding:12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size:14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+}
+
+.output{
+  background: rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:14px;
+  padding:12px;
+  min-height:70px;
+  overflow:auto;
+  color: var(--text);
+}
+
+.status{font-weight:900}
+.status.good{color: #35ff8b;}
+.status.bad{color: #ff6b6b;}
+
+/* ===== Back button (link -> button look) ===== */
+.link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 14px;
+  border-radius:14px;
+
+  background: rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.22);
+  color: rgba(234,242,255,0.95);
+
+  text-decoration:none;
+  font-weight:900;
+
+  box-shadow: 0 12px 26px rgba(0,0,0,0.20);
+  backdrop-filter: blur(10px);
+
+  transition: transform .15s ease, filter .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.link:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.18);
+}
+
+.link:active{
+  transform: translateY(0px) scale(0.99);
+}
+
+.link:focus{
+  outline: 3px solid rgba(96,165,250,0.45);
+  outline-offset: 2px;
+}
+
+.mini{color:var(--muted); font-size:13px}
+
+code{
+  color: var(--text);
+  background: rgba(255,255,255,0.14);
+  padding:2px 6px;
+  border-radius:8px;
+}
+
+/* ===== Drag & Drop (Order) ===== */
+.orderWrap{
+  display:grid;
+  gap:10px;
+  margin-top:10px;
+}
+
+.orderItem{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
+
+  cursor: grab;
+  user-select:none;
+}
+
+.orderItem:active{ cursor: grabbing; }
+
+.orderGrip{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.18);
+  background: rgba(96,165,250,0.18);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color: rgba(234,242,255,0.95);
+}
+
+.orderCode{
+  flex:1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size:14px;
+  color: var(--text);
+  direction:ltr;
+  text-align:left;
+}
+
+.orderItem.dragOver{
+  outline:2px dashed rgba(96,165,250,.55);
+  outline-offset:2px;
+  background: rgba(96,165,250,.10);
+}
+
+.orderActions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:12px;
+  gap:10px;
+}
+
+/* כל קוד – תמיד משמאל לימין */
+.editor,pre,code,
+.solution,
+.output {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+.orderCode,
+.tile code {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+
+/* ===== Move hint/solution next to Run/Reset ===== */
+.runRow{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.runLeft, .runRight{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* הסטטוס יישב באמצע/בשורה אם יש מקום */
+.runRow .status{
+  margin-inline: 10px;
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+}
+
+/* ===== Run bar: buttons left + status under buttons ===== */
+.runBar{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* ✅ הכל יושב בצד שמאל */
+  gap: 10px;
+}
+
+.runButtons{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* ✅ הכפתורים נצמדים לשמאל */
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* הסטטוס יופיע מתחת לכפתורים ובאותו קו שמאל */
+#status.status{
+  min-height: 22px;          /* שלא יקפוץ */
+  font-weight: 900;
+  margin: 0;
+  text-align: left;          /* ✅ */
+}
+
+
+/* ===== Run row: left = hint/solution, right = reset/run ===== */
+.runBar{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.runButtonsRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between; /* ✅ שמאל + ימין */
+  gap: 10px;
+  width: 100%;
+}
+
+.runLeft, .runRight{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ✅ כיוון RTL: שמאל אמיתי / ימין אמיתי */
+.runLeft{ justify-content: flex-start; }
+.runRight{ justify-content: flex-end; }
+
+/* הסטטוס מתחת, מיושר לימין/שמאל איך שתרצה */
+#status.status{
+  min-height: 22px;
+  font-weight: 900;
+  text-align: right;  /* אם תרצי שיהיה מימין */
+}
+
+/* אם אתה רוצה את הסטטוס מתחת לשמאל (מתחת לרמז/פתרון) */
+ /* #status.status{ text-align: left; } */

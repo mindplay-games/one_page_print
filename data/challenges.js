@@ -1,5 +1,5 @@
  const CHALLENGES = [
-  
+  {
     id: "cmd_print_name",
     group: "basics",
     topic: "פקודה",
@@ -18,5 +18,5 @@
       correctIndex: 1,
       explainCorrect: 'בפייתון מדפיסים עם print() והטקסט בתוך גרשיים.'
     }
-  
+  }
 ]

@@ -1,3 +1,15 @@
+
+function sfxPlay(id){
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  try{
+    el.currentTime = 0;                 // תמיד מתחיל מהתחלה
+    const p = el.play();                // ניגון
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  }catch{}
+}
+
 function main() {
   // הגנה: אם challenges לא נטען
   if (typeof CHALLENGES === "undefined" || !Array.isArray(CHALLENGES)) {
@@ -119,6 +131,7 @@ if (subtitle) {
   if (runBtn && editor) {
     runBtn.onclick = async () => {
       if (status) {
+        sfxPlay("sfxRun");
         status.textContent = "טוען/מריץ…";
         status.className = "status";
       }
@@ -131,6 +144,7 @@ if (subtitle) {
 
         if (!res.ok) {
           if (status) {
+            sfxPlay("sfxError");
             status.textContent = "❌ יש שגיאה בקוד";
             status.className = "status bad";
           }
@@ -139,11 +153,15 @@ if (subtitle) {
 
         if (!check.canCheck) {
           if (status) {
+            sfxPlay("sfxSuccess");
+
             status.textContent = "✅ רץ! (אין בדיקה אוטומטית לתרגיל הזה)";
             status.className = "status good";
           }
           return;
         }
+        if (check.passed) sfxPlay("sfxSuccess");
+        else sfxPlay("sfxError");
 
         if (status) {
           status.textContent = check.passed ? "✅ הצלחת! מעולה!" : "❌ עוד לא… בדוק פלט";
@@ -172,6 +190,7 @@ if (subtitle) {
         status.className = "status good";
       }
     } catch {
+      sfxPlay("sfxError");
       codeCard?.classList.add("hidden");
       showFallback(ch);
     }

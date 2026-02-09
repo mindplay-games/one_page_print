@@ -61,7 +61,9 @@ function main() {
 
   // מילוי טקסטים (עם fallback לערך ריק כדי לא לשבור)
   if (title) title.textContent = ch.title ?? "";
-  if (subtitle) subtitle.textContent = ch.subtitle ?? "";
+if (subtitle) {
+  subtitle.innerHTML = `אנחנו מיינדפלי - אצלנו לומדים לתכנת משחקים בחוג בזום, מוזמנים לשלוח הודעה בווצאפ <a href="https://did.li/QVeIw" target="_blank" rel="noopener">055-6662173</a> ולהצטרף לשיעור ניסיון אצלנו!`;
+}
   if (explain) explain.textContent = ch.explain ?? "";
   if (task) task.textContent = ch.task ?? "";
   if (hint) hint.textContent = ch.hint ?? "";

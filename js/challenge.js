@@ -74,7 +74,15 @@ function main() {
   // מילוי טקסטים (עם fallback לערך ריק כדי לא לשבור)
   if (title) title.textContent = ch.title ?? "";
 if (subtitle) {
-  subtitle.innerHTML = `אנחנו מיינדפלי - אצלנו לומדים לתכנת משחקים בחוג בזום, מוזמנים לשלוח הודעה בווצאפ <a href="https://did.li/QVeIw" target="_blank" rel="noopener">055-6662173</a> ולהצטרף לשיעור ניסיון אצלנו!`;
+subtitle.innerHTML = `
+אנחנו מיינדפלי - אצלנו לומדים לתכנת משחקים בחוג בזום, מוזמנים לשלוח הודעה בווצאפ 
+<a href="https://did.li/QVeIw"
+   target="_blank"
+   style="color:#4BFFB5; font-weight:700; text-decoration:underline;">
+   055-6662173
+</a>
+ולהצטרף לשיעור ניסיון אצלנו!
+`;
 }
   if (explain) explain.textContent = ch.explain ?? "";
   if (task) task.textContent = ch.task ?? "";
